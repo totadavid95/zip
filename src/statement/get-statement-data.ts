@@ -1,3 +1,7 @@
+/**
+ * @file Statement data extractor.
+ */
+
 import escapeStringRegexp from 'escape-string-regexp';
 import zod from 'zod';
 import { i18next } from '../i18n';

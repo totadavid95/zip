@@ -1,5 +1,5 @@
 /**
- * @file Internationalization (i18n) management
+ * @file Internationalization (i18n).
  */
 
 import I18nextCLILanguageDetector from 'i18next-cli-language-detector';
@@ -13,15 +13,13 @@ const EXT_YAML = '.yaml';
 const FALLBACK_LOCALE = 'en';
 
 /**
- * Load all resources from locales directory
+ * Load all resources from locales directory.
  *
- * @param dir Locales directory path
- * @returns Resources
+ * @param dir Locales directory path.
+ * @returns i18next-compatible resource object with translations.
  */
 const loadResources = (dir: string): Resource => {
     const resources: Resource = {};
-
-    // Read all files from locales directory
     const files = readdirSync(dir);
 
     for (const file of files) {

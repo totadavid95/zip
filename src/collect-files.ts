@@ -1,9 +1,14 @@
+/**
+ * @file File collector.
+ */
+
 import ignore from 'ignore';
 import normalizePath from 'normalize-path';
 import { readdirSync, existsSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
 const IGNORE_FILE_NAME = '.zipignore';
+const NL_RE = /\r?\n/;
 
 /**
  * Get ignore patterns from the specified directory.
@@ -18,9 +23,10 @@ const getIgnorePatterns = (dir: string): string[] => {
     if (existsSync(ignoreFile) && statSync(ignoreFile).isFile()) {
         const content = readFileSync(ignoreFile, 'utf8');
         const lines = content
-            .split(/\r?\n/)
+            .trim()
+            .split(NL_RE)
             .map((line) => line.trim())
-            .filter((line) => line.length > 0);
+            .filter((line) => line.length);
         patterns.push(...lines);
     }
 
@@ -28,7 +34,7 @@ const getIgnorePatterns = (dir: string): string[] => {
 };
 
 /**
- * Collect all files from a directory recursively, excluding specified patterns.
+ * Collect all files from a directory recursively, excluding ignored files based on .zipignore files.
  *
  * @param dir Directory path.
  * @returns Collected files.
