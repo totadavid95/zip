@@ -1,5 +1,5 @@
 import { dirname, join } from 'node:path';
-import { getStatementData } from '../src/statement/get-statement-data';
+import { getStatementData } from '../src/get-statement-data';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
