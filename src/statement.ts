@@ -1,10 +1,11 @@
 /**
- * @file Statement data extractor.
+ * @file Statement parser and generator.
  */
 
 import escapeStringRegexp from 'escape-string-regexp';
 import zod from 'zod';
 import { i18next } from './i18n';
+import { format } from 'date-fns';
 
 const REPLACE_MAP = new Map<string, string>([
     ['{{name}}', '(?<name>.+)'],
@@ -14,17 +15,23 @@ const REPLACE_MAP = new Map<string, string>([
     ['{{task}}', '(?<task>.+)'],
 ]);
 
-const statementDataSchema = zod
-    .object({
-        name: zod.string().trim().min(3),
-        neptun: zod.string().trim().length(6),
-        course: zod.string().trim().min(3),
-        date: zod.string().trim(),
-        task: zod.string().trim().min(3),
-    })
-    .strict();
+export const nameAndNeptunSchema = zod.object({
+    name: zod.string().trim().min(2),
+    neptun: zod
+        .string()
+        .trim()
+        .regex(/^[a-zA-Z0-9]{6}$/),
+});
 
-type StatementData = zod.infer<typeof statementDataSchema>;
+const statementDataSchema = nameAndNeptunSchema.extend({
+    course: zod.string().trim().min(1),
+    date: zod.string().trim(),
+    task: zod.string().trim().min(1),
+});
+
+export type NameAndNeptun = zod.infer<typeof nameAndNeptunSchema>;
+
+export type StatementData = zod.infer<typeof statementDataSchema>;
 
 /**
  * Extracts statement data from the given content based on the defined patterns in the i18next resources.
@@ -32,7 +39,7 @@ type StatementData = zod.infer<typeof statementDataSchema>;
  * @param content The content to extract statement data from.
  * @returns The extracted statement data, or `undefined` if no match is found.
  */
-export const getStatementData = (content: string): StatementData | undefined => {
+export const parseStatement = (content: string): StatementData | undefined => {
     // Get available languages from i18next
     const languages = Object.keys(i18next.options?.resources || {});
 
@@ -65,4 +72,32 @@ export const getStatementData = (content: string): StatementData | undefined => 
     }
 
     return undefined;
+};
+
+/**
+ * Formats the given date to the format used in the statement template.
+ *
+ * @param date The date to format.
+ * @returns The formatted date.
+ */
+const formatDate = (date: Date): string => {
+    return format(date, 'yyyy. MM. dd.');
+};
+
+/**
+ * Fills the statement template with the given data. If the data does not contain a date, the current date will be
+ * used.
+ *
+ * @param data The data to fill the statement template with.
+ * @returns The filled statement.
+ */
+export const generateStatement = (data: Partial<StatementData>): string => {
+    if (!('date' in data)) {
+        data.date = formatDate(new Date());
+    }
+
+    const parsedData = statementDataSchema.parse(data);
+    const statement = i18next.t('statement', parsedData);
+
+    return statement;
 };

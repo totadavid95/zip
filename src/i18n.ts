@@ -8,11 +8,11 @@ import i18next, { Resource } from 'i18next';
 import { join, parse, dirname } from 'node:path';
 import { readdirSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { EXT_YAML } from './common/constants';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const LOCALES_DIR = join(__dirname, './locales');
-const EXT_YAML = '.yaml';
 const FALLBACK_LOCALE = 'en';
 
 /**

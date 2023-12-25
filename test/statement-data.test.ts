@@ -1,5 +1,5 @@
 import { dirname, join } from 'node:path';
-import { getStatementData } from '../src/get-statement-data';
+import { parseStatement } from '../src/statement';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
@@ -27,10 +27,10 @@ describe('Get statement data', () => {
                 date: '2023. 11. 30.',
             },
         },
-    ])(`should get statement data from 'fixtures/$fixture'`, async ({ fixture, expected }) => {
+    ])(`should parse statement data from 'fixtures/$fixture'`, async ({ fixture, expected }) => {
         const path = join(__dirname, `./fixtures/${fixture}`);
         const content = await readFile(path, 'utf8');
 
-        expect(getStatementData(content)).toEqual(expected);
+        expect(parseStatement(content)).toEqual(expected);
     });
 });

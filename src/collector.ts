@@ -37,8 +37,8 @@ const getIgnorePatterns = (dir: string): string[] => {
  * @param dir Directory path.
  * @returns Collected files.
  */
-export const collectFiles = (dir: string): string[] => {
-    const collectFilesInternal = (subDir: string, ignores: string[] = []): string[] => {
+export const collectFiles = (dir: string, defaultIgnores: string[] = []): string[] => {
+    const collectFilesInternal = (subDir: string, ignores: string[] = defaultIgnores): string[] => {
         const files: string[] = [];
         const entries = readdirSync(subDir, { withFileTypes: true });
 
