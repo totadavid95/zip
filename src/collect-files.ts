@@ -6,9 +6,7 @@ import ignore from 'ignore';
 import normalizePath from 'normalize-path';
 import { readdirSync, existsSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
-
-const IGNORE_FILE_NAME = '.zipignore';
-const NL_RE = /\r?\n/;
+import { IGNORE_FILE_NAME, RE_NL } from './common/constants';
 
 /**
  * Get ignore patterns from the specified directory.
@@ -24,7 +22,7 @@ const getIgnorePatterns = (dir: string): string[] => {
         const content = readFileSync(ignoreFile, 'utf8');
         const lines = content
             .trim()
-            .split(NL_RE)
+            .split(RE_NL)
             .map((line) => line.trim())
             .filter((line) => line.length);
         patterns.push(...lines);

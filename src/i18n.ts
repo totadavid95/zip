@@ -5,8 +5,11 @@
 import I18nextCLILanguageDetector from 'i18next-cli-language-detector';
 import YAML from 'yaml';
 import i18next, { Resource } from 'i18next';
-import { join, parse } from 'node:path';
+import { join, parse, dirname } from 'node:path';
 import { readdirSync, readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const LOCALES_DIR = join(__dirname, './locales');
 const EXT_YAML = '.yaml';

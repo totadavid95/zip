@@ -1,6 +1,9 @@
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import { getStatementData } from '../src/statement/get-statement-data';
 import { readFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 describe('Get statement data', () => {
     it.each([

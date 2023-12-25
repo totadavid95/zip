@@ -1,5 +1,8 @@
-import { join } from 'node:path';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { collectFiles } from '../src/collect-files';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 describe('File collection', () => {
     it.each([
