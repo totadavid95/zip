@@ -8,14 +8,12 @@ import chalk from 'chalk';
 import { RE_NEPTUN, RE_NL, SPACE } from '../../common/constants';
 import { NameAndNeptun } from '../../statement';
 
-type StatementFormData = NameAndNeptun;
-
 /**
  * Interactive statement form.
  *
  * @returns Statement form data.
  */
-export const statementForm = async (): Promise<StatementFormData> => {
+export const statementForm = async (): Promise<NameAndNeptun> => {
     // Show statement preview
     const statement = i18next.t('statement');
     statement.split(RE_NL).forEach((line) => console.log(chalk.gray(line)));

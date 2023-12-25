@@ -4,6 +4,7 @@
 
 import { Command } from 'commander';
 import zod from 'zod';
+
 import { COMMA } from '../common/constants';
 
 const DEFAULT_OUTDIR = 'zipfiles';
@@ -21,6 +22,12 @@ const programOptionsSchema = zod
 
 export type ProgramOptions = zod.infer<typeof programOptionsSchema>;
 
+/**
+ * Get program options.
+ *
+ * @returns Program options.
+ * @throws {zod.ZodError} If the options are invalid.
+ */
 export const getProgramOptions = (): ProgramOptions => {
     const program = new Command();
 

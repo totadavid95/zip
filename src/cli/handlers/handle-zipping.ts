@@ -2,15 +2,16 @@
  * @file Zipping handler.
  */
 
-import { join } from 'node:path';
-import { mkdir } from 'fs/promises';
+import chalk from 'chalk';
 import i18next from 'i18next';
+import { filesize } from 'filesize';
+import { join } from 'node:path';
+import { mkdir } from 'node:fs/promises';
+import { stat } from 'node:fs/promises';
+
 import { ProgramContext } from '../program-context';
 import { generateZipFileName, zipFiles } from '../../zip';
 import { pathExists } from '../../utils/files';
-import { filesize } from 'filesize';
-import { stat } from 'node:fs/promises';
-import chalk from 'chalk';
 
 export const handleZipping = async (context: ProgramContext): Promise<void> => {
     context.printNextStep(i18next.t('stepHandleZipping'));

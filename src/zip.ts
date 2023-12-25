@@ -3,10 +3,11 @@
  */
 
 import AdmZip from 'adm-zip';
-import { collectFiles } from './collector';
-import { parse } from 'node:path';
 import slugify from 'slugify';
 import { format } from 'date-fns';
+import { parse } from 'node:path';
+
+import { collectFiles } from './collector';
 import { EXT_ZIP, HYPHEN, UNDERSCORE } from './common/constants';
 
 /**

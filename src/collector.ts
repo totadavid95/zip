@@ -6,6 +6,7 @@ import ignore from 'ignore';
 import normalizePath from 'normalize-path';
 import { readdirSync, existsSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
+
 import { IGNORE_FILE_NAME, RE_NL } from './common/constants';
 
 /**

@@ -4,8 +4,9 @@
 
 import escapeStringRegexp from 'escape-string-regexp';
 import zod from 'zod';
-import { i18next } from './i18n';
 import { format } from 'date-fns';
+
+import { i18next } from './i18n';
 
 const REPLACE_MAP = new Map<string, string>([
     ['{{name}}', '(?<name>.+)'],
@@ -90,6 +91,7 @@ const formatDate = (date: Date): string => {
  *
  * @param data The data to fill the statement template with.
  * @returns The filled statement.
+ * @throws {zod.ZodError} If the data is invalid.
  */
 export const generateStatement = (data: Partial<StatementData>): string => {
     if (!('date' in data)) {

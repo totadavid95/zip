@@ -2,15 +2,16 @@
  * @file Statement handler.
  */
 
+import chalk from 'chalk';
+import i18next from 'i18next';
 import { join } from 'node:path';
 import { readFile, writeFile } from 'node:fs/promises';
-import { StatementData, generateStatement, parseStatement } from '../../statement';
-import i18next from 'i18next';
-import { statementForm } from '../forms/statement-form';
+
 import { ProgramContext } from '../program-context';
 import { STATEMENT_FILE_NAME } from '../../common/constants';
+import { StatementData, generateStatement, parseStatement } from '../../statement';
 import { pathExists } from '../../utils/files';
-import chalk from 'chalk';
+import { statementForm } from '../forms/statement-form';
 
 export const handleStatement = async (context: ProgramContext): Promise<void> => {
     context.printNextStep(i18next.t('stepHandleStatement'));
