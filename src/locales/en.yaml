@@ -15,7 +15,7 @@ statement: |
     Dated: {{date}}
 statementConfirmation: Do you accept the statement above?
 statementConfirmationDeclined: Statement confirmation declined. You are not allowed to submit your solution without accepting the statement.
-statementConfirmationAccepted: Statement successfully accepted.
+statementConfirmationAccepted: Statement successfully accepted. Please fill your name and Neptun code below, because it is required to fill the statement file.
 statementNameTooShort: Name is too short, it should contain at least {{min}} characters.
 statementNameMissingSpace: Name should contain at least two words separated by a space.
 statementNameQuestion: What is your name?
