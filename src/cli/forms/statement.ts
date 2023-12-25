@@ -2,11 +2,12 @@
  * @file Interactive statement form.
  */
 
-import { i18next } from '../../i18n';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
-import { RE_NEPTUN, RE_NL, SPACE } from '../../common/constants';
+
 import { NameAndNeptun } from '../../statement';
+import { RE_NEPTUN, RE_NL, SPACE } from '../../common/constants';
+import { i18next } from '../../i18n';
 
 /**
  * Interactive statement form.
