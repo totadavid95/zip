@@ -10,7 +10,7 @@
         "lint": "eslint . --cache --ext .ts",
         "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json|yml|yaml)\"",
         "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
-        "build": "rimraf ./dist && tsc && copyfiles src/locales/*.yaml dist/locales"
+        "build": "rimraf ./dist && tsc --noEmit && esbuild src/cli/index.ts --bundle --platform=node --format=esm --packages=external --outfile=dist/cli.js && copyfiles --flat src/locales/*.yaml dist/locales"
     },
     "devDependencies": {
         "@swc/core": "^1.3.101",
