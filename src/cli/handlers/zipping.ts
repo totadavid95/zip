@@ -6,8 +6,7 @@ import chalk from 'chalk';
 import i18next from 'i18next';
 import { filesize } from 'filesize';
 import { join } from 'node:path';
-import { mkdir } from 'node:fs/promises';
-import { stat } from 'node:fs/promises';
+import { mkdir, stat } from 'node:fs/promises';
 
 import { ProgramContext } from '../context';
 import { generateZipFileName, zipFiles } from '../../zip';

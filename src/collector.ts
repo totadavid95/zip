@@ -37,6 +37,7 @@ const getIgnorePatterns = async (dir: string): Promise<string[]> => {
  * Collect all files from a directory recursively, excluding ignored files based on .zipignore files.
  *
  * @param dir Directory path.
+ * @param defaultIgnores Default ignore patterns.
  * @returns Collected files.
  */
 export const collectFiles = async (dir: string, defaultIgnores: string[] = []): Promise<string[]> => {

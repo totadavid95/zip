@@ -35,6 +35,7 @@ export const generateZipFileName = (name: string, neptun: string, task: string):
  * You can specify additional ignores, like `node_modules`.
  *
  * @param dir Directory path.
+ * @param defaultIgnores Default ignore patterns.
  * @returns ZIP file.
  */
 export const zipFiles = async (dir: string, defaultIgnores: string[] = []): Promise<AdmZip> => {
