@@ -4,7 +4,7 @@
 
 import escapeStringRegexp from 'escape-string-regexp';
 import zod from 'zod';
-import { i18next } from '../i18n';
+import { i18next } from './i18n';
 
 const REPLACE_MAP = new Map<string, string>([
     ['{{name}}', '(?<name>.+)'],
