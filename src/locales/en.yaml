@@ -24,3 +24,14 @@ statement: |
     - I acknowledged that the most serious consequence of a disciplinary fault can be dismissal of the student from the University.
 
     Dated: {{date}}
+statementConfirmation: Do you accept the statement above?
+statementConfirmationDeclined: Statement confirmation declined. You are not allowed to submit your solution without accepting the statement above.
+statementConfirmationAccepted: Statement successfully accepted.
+statementNameTooShort: Name is too short.
+statementNameMissingSpace: Name should contain at least two words separated by a space.
+statementNameQuestion: What is your name?
+statementNeptunQuestion: What is your Neptun code?
+statementNeptunLength: Neptun code should be 6 characters long.
+statementNeptunInvalid: Neptun code should contain only letters and numbers.
+statementConfirmationAccept: Accept
+statementConfirmationDecline: Decline
