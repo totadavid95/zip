@@ -1,5 +1,20 @@
-# TODO: Cleanup + Hungarian translation
+# Generic
+stepWithTitle: 'Step {{step}}: {{title}}'
+fatalError: 'A fatal error occurred and the program cannot continue. See the error message below for more details:'
+done: Done
 
+# Options
+taskOptionDescription: Specifies the task name (required)
+courseOptionDescription: Specifies the course name (required)
+outputDirOptionDescription: Specifies the output directory
+ignoreOptionDescription: Specifies the paths to ignore in addition to the ignores defined in .zipignore
+noVerifyOptionDescription: Ignore verifying files after zipping
+language: Language
+duplicatedLanguageOption: Duplicated language option
+unsupportedLanguage: 'Unsupported language: {{language}}'
+
+# Step 1. Handle statement
+stepHandleStatement: Statement
 statement: |
     Statement
 
@@ -13,39 +28,29 @@ statement: |
     - I acknowledged that the most serious consequence of a disciplinary fault can be dismissal of the student from the University.
 
     Dated: {{date}}
-statementConfirmation: Do you accept the statement above?
-statementConfirmationDeclined: Statement confirmation declined. You are not allowed to submit your solution without accepting the statement.
+statementExistentButInvalid: Statement file exists but is invalid. Please try to delete the statement file ({{statement}}) and run the zip command again.
+statementExistentAndValid: Statement already filled for name {{name}} and Neptun code {{neptun}}. If you want to change it, please delete the statement file ({{statement}}) and run the zip command again.
+statementConfirmationQuestion: Do you accept the statement above?
+accept: Accept
+decline: Decline
+statementConfirmationDeclined: Statement declined. You are not allowed to submit your solution without accepting the statement.
 statementConfirmationAccepted: Statement successfully accepted. Please fill your name and Neptun code below, because it is required to fill the statement file.
-statementNameTooShort: Name is too short, it should contain at least {{min}} characters.
-statementNameMissingSpace: Name should contain at least two words separated by a space.
 statementNameQuestion: What is your name?
+statementNameTooShort: Name is too short, it should contain at least {{min}} characters.
+statementNameMissingSpace: Name should contain at least two parts separated by a space.
 statementNeptunQuestion: What is your Neptun code?
 statementNeptunLength: Neptun code should be 6 characters long.
 statementNeptunInvalid: Neptun code should contain only letters and numbers.
-statementConfirmationAccept: Accept
-statementConfirmationDecline: Decline
-
-statementExistentButInvalid: Statement file exists but is invalid. Please try to delete the statement file ({{statement}}) and run the zip command again.
-statementExistentAndValid: Statement already filled for name {{name}} and Neptun code {{neptun}}. If you want to change it, please delete the statement file ({{statement}}) and run the zip command again.
-step: 'Step {{step}}: {{title}}'
 statementCreated: Statement file created at {{path}}.
 
-stepHandleStatement: Fill statement
-fatalError: 'A fatal error occurred and the program cannot continue. See the error message below for more details:'
-
-stepHandleZipping: Zip solution
-
-zippingFiles: Zipping files
-writingZipFile: Writing zip file to {{path}}
-
+stepHandleZipping: Creating zip file
+zippingFiles: Collect and zip files
 creatingOutputDir: Creating output directory at {{path}}
-
-done: Done
+writingZipFile: Writing zip file to {{path}}
 size: 'Size: {{size}}'
 
-stepHandleNotice: Notice
-
-notice: |
+stepHandleFinalNotice: Notice
+finalNotices: |
     * You should submit your solution via the Canvas system.
     * It is your responsibility to submit the assignment correctly. After submitting your solution, it is recommended to download it from Canvas and check if it contains all the files you want to submit.
     * There is no possibility to submit your solution after the deadline, because the Canvas system will be closed automatically.

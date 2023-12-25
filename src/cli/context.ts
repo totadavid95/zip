@@ -35,7 +35,7 @@ export class ProgramContext {
      */
     public printNextStep(title: string): void {
         console.log(EMPTY_STRING);
-        console.log(chalk.bgGray.black(t('step', { step: ++this.step, title })));
+        console.log(chalk.bgGray.black(t('stepWithTitle', { step: ++this.step, title })));
         console.log(EMPTY_STRING);
     }
 

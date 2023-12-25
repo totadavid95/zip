@@ -10,7 +10,7 @@ import { initializeI18n } from '../i18n';
 import { ProgramContext } from './context';
 import { handleStatement } from './handlers/statement';
 import { handleZipping } from './handlers/zipping';
-import { handleNotice } from './handlers/notice';
+import { handleFinalNotice } from './handlers/notice';
 
 const main = async () => {
     try {
@@ -20,7 +20,7 @@ const main = async () => {
         await handleStatement(context);
         await handleZipping(context);
         // FIXME: Verify the zip file.
-        await handleNotice(context);
+        await handleFinalNotice(context);
     } catch (error: unknown) {
         console.error(chalk.red(t('fatalError')));
 

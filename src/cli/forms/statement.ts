@@ -24,10 +24,10 @@ export const statementForm = async (): Promise<NameAndNeptun> => {
         {
             type: 'list',
             name: 'confirmation',
-            message: t('statementConfirmation'),
+            message: t('statementConfirmationQuestion'),
             choices: [
-                { name: t('statementConfirmationAccept'), value: true },
-                { name: t('statementConfirmationDecline'), value: false },
+                { name: t('accept'), value: true },
+                { name: t('decline'), value: false },
             ],
         },
     ]);

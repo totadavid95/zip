@@ -1,3 +1,20 @@
+# Generic
+stepWithTitle: '{{step}}. lépés: {{title}}'
+fatalError: 'Egy súlyos hiba történt, és a program nem folytatható. Lásd az alábbi hibaüzenetet a részletekért:'
+done: Kész
+
+# Options
+taskOptionDescription: Megadja a feladat nevét (kötelező)
+courseOptionDescription: Megadja a kurzus nevét (kötelező)
+outputDirOptionDescription: Megadja a kimeneti könyvtárat
+ignoreOptionDescription: Megadja a figyelmen kívül hagyandó fájlok elérési útját, a .zipignore-ban megadottakon kívül
+noVerifyOptionDescription: A tömörítés utáni fájlverifikáció figyelmen kívül hagyása
+language: Nyelv
+duplicatedLanguageOption: Duplikált nyelv beállítás
+unsupportedLanguage: 'Nem támogatott nyelv: {{language}}'
+
+# Step 1. Handle statement
+stepHandleStatement: Nyilatkozat
 statement: |
     Nyilatkozat
 
@@ -11,3 +28,29 @@ statement: |
     - Tudomásul vettem, hogy a fegyelmi vétség legsúlyosabb következménye a hallgató elbocsátása az egyetemről.
 
     Kelt: {{date}}
+statementExistentButInvalid: A nyilatkozatfájl létezik, de érvénytelen. Kérjük, próbáld meg törölni a nyilatkozatfájlt ({{statement}}), majd futtasd újra a zip parancsot.
+statementExistentAndValid: A nyilatkozat már kitöltve a(z) {{name}} névvel és a(z) {{neptun}} Neptun kóddal. Ha szeretnéd megváltoztatni, kérjük, töröld a nyilatkozatfájlt ({{statement}}), majd futtasd újra a zip parancsot.
+statementConfirmationQuestion: Elfogadod a fenti nyilatkozatot?
+accept: Elfogadás
+decline: Elutasítás
+statementConfirmationDeclined: A nyilatkozat el lett utasítva. A megoldás beküldése nem lehetséges a nyilatkozat elfogadása nélkül.
+statementConfirmationAccepted: A nyilatkozat sikeresen el lett fogadva. Kérjük, add meg a neved és a Neptun kódod, mert ezek megadása szükséges a nyilatkozatfájl kitöltéséhez.
+statementNameQuestion: Mi a neved?
+statementNameTooShort: A név túl rövid, legalább {{min}} karaktert kell tartalmaznia.
+statementNameMissingSpace: A név legalább két részt kell, hogy tartalmazzon, szóközzel elválasztva.
+statementNeptunQuestion: Mi a Neptun kódod?
+statementNeptunLength: A Neptun kódnak 6 karakter hosszúnak kell lennie.
+statementNeptunInvalid: A Neptun kód csak betűket és számokat tartalmazhat.
+statementCreated: 'Nyilatkozatfájl létrehozva itt: {{path}}.'
+
+stepHandleZipping: Zip fájl létrehozása
+zippingFiles: Fájlok összegyűjtése és tömörítése
+creatingOutputDir: 'Kimeneti könyvtár létrehozása itt: {{path}}'
+writingZipFile: 'Zip fájl írása ide: {{path}}'
+size: 'Méret: {{size}}'
+
+stepHandleFinalNotice: Figyelmeztetés
+finalNotices: |
+    * A megoldást a Canvas rendszeren keresztül kell beküldeni.
+    * A megoldás helyes beküldése a Te felelősséged. A megoldás beküldése után ajánlott letölteni a Canvas rendszerből, és ellenőrizni, hogy tartalmazza-e az összes fájlt, amit beküldeni szeretnél.
+    * Nincs lehetőség megoldások beküldésére a határidő lejárta után, mivel a Canvas rendszer automatikusan lezárul.
