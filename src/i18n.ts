@@ -2,11 +2,11 @@
  * @file Internationalization (i18n) management
  */
 
-import i18next, { Resource } from 'i18next';
 import I18nextCLILanguageDetector from 'i18next-cli-language-detector';
-import { readdirSync, readFileSync } from 'node:fs';
-import { join, parse } from 'node:path';
 import YAML from 'yaml';
+import i18next, { Resource } from 'i18next';
+import { join, parse } from 'node:path';
+import { readdirSync, readFileSync } from 'node:fs';
 
 const LOCALES_DIR = join(__dirname, './locales');
 const EXT_YAML = '.yaml';
@@ -44,12 +44,7 @@ const loadResources = (dir: string): Resource => {
 // Initialize i18next
 i18next.use(I18nextCLILanguageDetector).init({
     resources: loadResources(LOCALES_DIR),
-    // fallbackLng: FALLBACK_LOCALE,
+    fallbackLng: FALLBACK_LOCALE,
 });
-
-// FIXME: remove
-// console.log(i18next.t('statementPreview', { course: 'kurzus' }));
-console.log(Object.keys(i18next.options.resources));
-console.log(i18next.getResource('hu', 'translation', 'statement'));
 
 export { i18next };

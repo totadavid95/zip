@@ -1,0 +1,12 @@
+Statement
+
+I, John Doe (Neptun code: ABC123), declare that I have submitted this solution for the task PHP assignment of the course Web Programming.
+By submitting this assignment, I acknowledge that I have taken note of the statements below:
+
+- I declare that this solution is my own work.
+- I declare that I have not copied or used third party solutions.
+- I declare that I have not passed my solution to my classmates, neither  made it public.
+- I acknowledged that the Students' regulation of Eötvös Loránd University (ELTE Regulations Vol. II. 74/C. § ) states that as long as a student presents another student's work - or at least the significant part of it - as his/her own performance, it will count as a disciplinary fault. 
+- I acknowledged that the most serious consequence of a disciplinary fault can be dismissal of the student from the University.
+
+Dated: 2023. 11. 30.
