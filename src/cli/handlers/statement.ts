@@ -11,7 +11,7 @@ import { ProgramContext } from '../context';
 import { STATEMENT_FILE_NAME } from '../../common/constants';
 import { StatementData, generateStatement, parseStatement } from '../../statement';
 import { pathExists } from '../../utils/files';
-import { statementForm } from '../forms/statement-form';
+import { statementForm } from '../forms/statement';
 
 export const handleStatement = async (context: ProgramContext): Promise<void> => {
     context.printNextStep(i18next.t('stepHandleStatement'));
