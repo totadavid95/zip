@@ -7,7 +7,7 @@ import i18next from 'i18next';
 import { join } from 'node:path';
 import { readFile, writeFile } from 'node:fs/promises';
 
-import { ProgramContext } from '../program-context';
+import { ProgramContext } from '../context';
 import { STATEMENT_FILE_NAME } from '../../common/constants';
 import { StatementData, generateStatement, parseStatement } from '../../statement';
 import { pathExists } from '../../utils/files';

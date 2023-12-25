@@ -12,9 +12,9 @@ const DEFAULT_IGNORES = ['node_modules', 'vendor', '.git', '.DS_Store', '.idea',
 
 const programOptionsSchema = zod
     .object({
-        task: zod.string().min(1),
-        course: zod.string().min(1),
-        outdir: zod.string().min(1),
+        task: zod.string().trim().min(1),
+        course: zod.string().trim().min(1),
+        outdir: zod.string().trim().min(1),
         verify: zod.boolean(),
         ignore: zod.array(zod.string()),
     })

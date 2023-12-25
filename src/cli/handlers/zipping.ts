@@ -9,7 +9,7 @@ import { join } from 'node:path';
 import { mkdir } from 'node:fs/promises';
 import { stat } from 'node:fs/promises';
 
-import { ProgramContext } from '../program-context';
+import { ProgramContext } from '../context';
 import { generateZipFileName, zipFiles } from '../../zip';
 import { pathExists } from '../../utils/files';
 

@@ -5,7 +5,7 @@
 import chalk from 'chalk';
 import i18next from 'i18next';
 
-import { ProgramOptions, getProgramOptions } from './program-options';
+import { ProgramOptions, getProgramOptions } from './options';
 import { StatementData, nameAndNeptunSchema } from '../statement';
 import { EMPTY_STRING } from '../common/constants';
 
@@ -15,18 +15,17 @@ import { EMPTY_STRING } from '../common/constants';
 export class ProgramContext {
     public readonly options: ProgramOptions;
 
-    private step: number;
+    private step: number = 0;
 
-    public name: string = '';
+    public name: string = EMPTY_STRING;
 
-    public neptun: string = '';
+    public neptun: string = EMPTY_STRING;
 
     /**
      * Constructor.
      */
     constructor() {
         this.options = getProgramOptions();
-        this.step = 0;
     }
 
     /**

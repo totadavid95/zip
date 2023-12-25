@@ -5,7 +5,7 @@
 import chalk from 'chalk';
 import i18next from 'i18next';
 
-import { ProgramContext } from '../program-context';
+import { ProgramContext } from '../context';
 import { RE_NL } from '../../common/constants';
 
 export const handleNotice = async (context: ProgramContext): Promise<void> => {

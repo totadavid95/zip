@@ -6,10 +6,10 @@
 import chalk from 'chalk';
 import i18next from 'i18next';
 
-import { ProgramContext } from './program-context';
-import { handleStatement } from './handlers/handle-statement';
-import { handleZipping } from './handlers/handle-zipping';
-import { handleNotice } from './handlers/handle-notice';
+import { ProgramContext } from './context';
+import { handleStatement } from './handlers/statement';
+import { handleZipping } from './handlers/zipping';
+import { handleNotice } from './handlers/notice';
 
 const main = async () => {
     try {
