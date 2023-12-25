@@ -3,7 +3,7 @@
  */
 
 import chalk from 'chalk';
-import i18next from 'i18next';
+import { t } from 'i18next';
 
 import { ProgramOptions, getProgramOptions } from './options';
 import { StatementData, nameAndNeptunSchema } from '../statement';
@@ -35,7 +35,7 @@ export class ProgramContext {
      */
     public printNextStep(title: string): void {
         console.log(EMPTY_STRING);
-        console.log(chalk.bgGray.black(i18next.t('step', { step: ++this.step, title })));
+        console.log(chalk.bgGray.black(t('step', { step: ++this.step, title })));
         console.log(EMPTY_STRING);
     }
 

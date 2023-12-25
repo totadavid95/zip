@@ -7,7 +7,7 @@ import chalk from 'chalk';
 
 import { NameAndNeptun } from '../../statement';
 import { RE_NEPTUN, RE_NL, SPACE } from '../../common/constants';
-import { i18next } from '../../i18n';
+import { t } from 'i18next';
 
 /**
  * Interactive statement form.
@@ -16,7 +16,7 @@ import { i18next } from '../../i18n';
  */
 export const statementForm = async (): Promise<NameAndNeptun> => {
     // Show statement preview
-    const statement = i18next.t('statement');
+    const statement = t('statement');
     statement.split(RE_NL).forEach((line) => console.log(chalk.gray(line)));
 
     // Ask for confirmation
@@ -24,33 +24,33 @@ export const statementForm = async (): Promise<NameAndNeptun> => {
         {
             type: 'list',
             name: 'confirmation',
-            message: i18next.t('statementConfirmation'),
+            message: t('statementConfirmation'),
             choices: [
-                { name: i18next.t('statementConfirmationAccept'), value: true },
-                { name: i18next.t('statementConfirmationDecline'), value: false },
+                { name: t('statementConfirmationAccept'), value: true },
+                { name: t('statementConfirmationDecline'), value: false },
             ],
         },
     ]);
 
     if (!confirmation.confirmation) {
-        throw new Error(i18next.t('statementConfirmationDeclined'));
+        throw new Error(t('statementConfirmationDeclined'));
     }
 
-    console.log(chalk.green(i18next.t('statementConfirmationAccepted')));
+    console.log(chalk.green(t('statementConfirmationAccepted')));
 
     // Ask for student name and neptun code
     const questions = [
         {
             type: 'input',
             name: 'name',
-            message: i18next.t('statementNameQuestion'),
+            message: t('statementNameQuestion'),
             validate(name: string) {
                 name = name.trim();
                 if (name.length < 2) {
-                    return i18next.t('statementNameTooShort', { min: 2 });
+                    return t('statementNameTooShort', { min: 2 });
                 }
                 if (name.indexOf(SPACE) === -1) {
-                    return i18next.t('statementNameMissingSpace');
+                    return t('statementNameMissingSpace');
                 }
                 return true;
             },
@@ -68,14 +68,14 @@ export const statementForm = async (): Promise<NameAndNeptun> => {
         {
             type: 'input',
             name: 'neptun',
-            message: i18next.t('statementNeptunQuestion'),
+            message: t('statementNeptunQuestion'),
             validate(neptun: string) {
                 neptun = neptun.trim();
                 if (neptun.length !== 6) {
-                    return i18next.t('statementNeptunLength');
+                    return t('statementNeptunLength');
                 }
                 if (!neptun.match(RE_NEPTUN)) {
-                    return i18next.t('statementNeptunInvalid');
+                    return t('statementNeptunInvalid');
                 }
                 return true;
             },

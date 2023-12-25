@@ -4,7 +4,8 @@
  */
 
 import chalk from 'chalk';
-import i18next from 'i18next';
+import { t } from 'i18next';
+import { initializeI18n } from '../i18n';
 
 import { ProgramContext } from './context';
 import { handleStatement } from './handlers/statement';
@@ -13,6 +14,7 @@ import { handleNotice } from './handlers/notice';
 
 const main = async () => {
     try {
+        await initializeI18n();
         const context = new ProgramContext();
 
         await handleStatement(context);
@@ -20,7 +22,7 @@ const main = async () => {
         // FIXME: Verify the zip file.
         await handleNotice(context);
     } catch (error: unknown) {
-        console.error(chalk.red(i18next.t('fatalError')));
+        console.error(chalk.red(t('fatalError')));
 
         if (error instanceof Error) {
             console.error(chalk.red(error.message));

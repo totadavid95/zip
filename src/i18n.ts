@@ -4,9 +4,9 @@
 
 import I18nextCLILanguageDetector from 'i18next-cli-language-detector';
 import YAML from 'yaml';
-import i18next, { Resource } from 'i18next';
+import { use, Resource } from 'i18next';
 import { join, parse, dirname } from 'node:path';
-import { readdirSync, readFileSync } from 'node:fs';
+import { readdir, readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 import { EXT_YAML } from './common/constants';
@@ -22,9 +22,9 @@ const FALLBACK_LOCALE = 'en';
  * @param dir Locales directory path.
  * @returns i18next-compatible resource object with translations.
  */
-const loadResources = (dir: string): Resource => {
+const loadResources = async (dir: string): Promise<Resource> => {
     const resources: Resource = {};
-    const files = readdirSync(dir);
+    const files = await readdir(dir);
 
     for (const file of files) {
         const { name, ext } = parse(file);
@@ -33,7 +33,7 @@ const loadResources = (dir: string): Resource => {
             continue;
         }
 
-        const locale = readFileSync(join(dir, file), 'utf8');
+        const locale = await readFile(join(dir, file), 'utf8');
 
         resources[name] = {
             translation: YAML.parse(locale),
@@ -43,10 +43,13 @@ const loadResources = (dir: string): Resource => {
     return resources;
 };
 
-// Initialize i18next
-i18next.use(I18nextCLILanguageDetector).init({
-    resources: loadResources(LOCALES_DIR),
-    fallbackLng: FALLBACK_LOCALE,
-});
-
-export { i18next };
+/**
+ * Initialize i18next.
+ */
+export const initializeI18n = async (): Promise<void> => {
+    // Initialize i18next
+    use(I18nextCLILanguageDetector).init({
+        resources: await loadResources(LOCALES_DIR),
+        fallbackLng: FALLBACK_LOCALE,
+    });
+};

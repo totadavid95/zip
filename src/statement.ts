@@ -5,8 +5,7 @@
 import escapeStringRegexp from 'escape-string-regexp';
 import zod from 'zod';
 import { format } from 'date-fns';
-
-import { i18next } from './i18n';
+import i18next, { t } from 'i18next';
 
 const REPLACE_MAP = new Map<string, string>([
     ['{{name}}', '(?<name>.+)'],
@@ -99,7 +98,7 @@ export const generateStatement = (data: Partial<StatementData>): string => {
     }
 
     const parsedData = statementDataSchema.parse(data);
-    const statement = i18next.t('statement', parsedData);
+    const statement = t('statement', parsedData);
 
     return statement;
 };

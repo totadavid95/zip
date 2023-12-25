@@ -3,7 +3,7 @@
  */
 
 import chalk from 'chalk';
-import i18next from 'i18next';
+import { t } from 'i18next';
 import { join } from 'node:path';
 import { readFile, writeFile } from 'node:fs/promises';
 
@@ -14,7 +14,7 @@ import { pathExists } from '../../utils/files';
 import { statementForm } from '../forms/statement';
 
 export const handleStatement = async (context: ProgramContext): Promise<void> => {
-    context.printNextStep(i18next.t('stepHandleStatement'));
+    context.printNextStep(t('stepHandleStatement'));
 
     const statementPath = join(process.cwd(), STATEMENT_FILE_NAME);
 
@@ -23,12 +23,12 @@ export const handleStatement = async (context: ProgramContext): Promise<void> =>
         const data = parseStatement(content);
 
         if (!data) {
-            throw new Error(i18next.t('statementExistentButInvalid', { statement: chalk.yellow(statementPath) }));
+            throw new Error(t('statementExistentButInvalid', { statement: chalk.yellow(statementPath) }));
         }
 
         console.log(
             chalk.green(
-                i18next.t('statementExistentAndValid', {
+                t('statementExistentAndValid', {
                     name: chalk.yellow(data.name),
                     neptun: chalk.yellow(data.neptun),
                     statement: chalk.yellow(statementPath),
@@ -48,6 +48,6 @@ export const handleStatement = async (context: ProgramContext): Promise<void> =>
     };
     const filledStatement = generateStatement(data);
     await writeFile(statementPath, filledStatement);
-    console.log(chalk.green(i18next.t('statementCreated', { path: chalk.yellow(statementPath) })));
+    console.log(chalk.green(t('statementCreated', { path: chalk.yellow(statementPath) })));
     return;
 };
