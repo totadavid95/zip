@@ -8,7 +8,7 @@
     "bin": "dist/cli.js",
     "scripts": {
         "lint": "eslint . --cache --ext .ts",
-        "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
+        "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json|yml|yaml)\"",
         "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest"
     },
     "devDependencies": {
