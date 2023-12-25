@@ -50,7 +50,7 @@ export const statementForm = async (): Promise<StatementFormData> => {
             validate(name: string) {
                 name = name.trim();
                 if (name.length < 2) {
-                    return i18next.t('statementNameTooShort');
+                    return i18next.t('statementNameTooShort', { min: 2 });
                 }
                 if (name.indexOf(SPACE) === -1) {
                     return i18next.t('statementNameMissingSpace');
@@ -62,8 +62,8 @@ export const statementForm = async (): Promise<StatementFormData> => {
                     .split(SPACE)
                     .filter((part) => part.length)
                     .map((part) => {
-                        const partLower = part.toLowerCase();
-                        return partLower.charAt(0).toUpperCase() + partLower.slice(1);
+                        const lowercase = part.toLowerCase();
+                        return lowercase.charAt(0).toUpperCase() + lowercase.slice(1);
                     })
                     .join(SPACE);
             },
@@ -90,5 +90,3 @@ export const statementForm = async (): Promise<StatementFormData> => {
 
     return await inquirer.prompt(questions);
 };
-
-statementForm();
