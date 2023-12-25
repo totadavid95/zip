@@ -20,7 +20,7 @@ export const handleZipping = async (context: ProgramContext): Promise<void> => {
     let step = 0;
 
     process.stdout.write(` ${++step}. ${i18next.t('zippingFiles')}... `);
-    const zip = zipFiles(cwd, context.options.ignore);
+    const zip = await zipFiles(cwd, context.options.ignore);
     console.log(chalk.green(i18next.t('done')));
 
     const zipFileName = generateZipFileName(context.name, context.neptun, context.options.task);

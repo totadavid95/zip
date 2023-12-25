@@ -4,10 +4,11 @@
 
 import ignore from 'ignore';
 import normalizePath from 'normalize-path';
-import { readdirSync, existsSync, readFileSync, statSync } from 'node:fs';
+import { readdir, readFile, stat } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 
 import { IGNORE_FILE_NAME, RE_NL } from './common/constants';
+import { pathExists } from './utils/files';
 
 /**
  * Get ignore patterns from the specified directory.
@@ -15,12 +16,12 @@ import { IGNORE_FILE_NAME, RE_NL } from './common/constants';
  * @param dir Directory path.
  * @returns Ignore patterns.
  */
-const getIgnorePatterns = (dir: string): string[] => {
+const getIgnorePatterns = async (dir: string): Promise<string[]> => {
     const patterns = [];
     const ignoreFile = join(dir, IGNORE_FILE_NAME);
 
-    if (existsSync(ignoreFile) && statSync(ignoreFile).isFile()) {
-        const content = readFileSync(ignoreFile, 'utf8');
+    if ((await pathExists(ignoreFile)) && (await stat(ignoreFile)).isFile()) {
+        const content = await readFile(ignoreFile, 'utf8');
         const lines = content
             .trim()
             .split(RE_NL)
@@ -38,12 +39,12 @@ const getIgnorePatterns = (dir: string): string[] => {
  * @param dir Directory path.
  * @returns Collected files.
  */
-export const collectFiles = (dir: string, defaultIgnores: string[] = []): string[] => {
-    const collectFilesInternal = (subDir: string, ignores: string[] = defaultIgnores): string[] => {
+export const collectFiles = async (dir: string, defaultIgnores: string[] = []): Promise<string[]> => {
+    const collectFilesInternal = async (subDir: string, ignores: string[] = defaultIgnores): Promise<string[]> => {
         const files: string[] = [];
-        const entries = readdirSync(subDir, { withFileTypes: true });
+        const entries = await readdir(subDir, { withFileTypes: true });
 
-        const ignoredPaths: string[] = [...ignores, ...getIgnorePatterns(subDir)];
+        const ignoredPaths: string[] = [...ignores, ...(await getIgnorePatterns(subDir))];
         const ignoreInstance = ignore().add(ignoredPaths);
 
         for (const entry of entries) {
@@ -54,7 +55,7 @@ export const collectFiles = (dir: string, defaultIgnores: string[] = []): string
             }
 
             if (entry.isDirectory()) {
-                files.push(...collectFilesInternal(join(subDir, entry.name), ignoredPaths));
+                files.push(...(await collectFilesInternal(join(subDir, entry.name), ignoredPaths)));
             } else if (entry.isFile()) {
                 files.push(normalizePath(relativePath));
             }

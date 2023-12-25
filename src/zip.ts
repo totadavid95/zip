@@ -37,9 +37,9 @@ export const generateZipFileName = (name: string, neptun: string, task: string):
  * @param dir Directory path.
  * @returns ZIP file.
  */
-export const zipFiles = (dir: string, defaultIgnores: string[] = []): AdmZip => {
+export const zipFiles = async (dir: string, defaultIgnores: string[] = []): Promise<AdmZip> => {
     const zip = new AdmZip();
-    const filePaths = collectFiles(dir, defaultIgnores);
+    const filePaths = await collectFiles(dir, defaultIgnores);
 
     for (const filePath of filePaths) {
         zip.addLocalFile(filePath, parse(filePath).dir);

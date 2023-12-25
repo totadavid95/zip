@@ -2,9 +2,8 @@
  * @file File utilities.
  */
 
-import { stat } from 'fs/promises';
+import { readFile, stat } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import { readFileSync } from 'node:fs';
 
 /**
  * Calculate an MD5 checksum of a file.
@@ -12,8 +11,8 @@ import { readFileSync } from 'node:fs';
  * @param filePath File path.
  * @returns Calculated checksum.
  */
-export const getFileChecksum = (filePath: string): string => {
-    const content = readFileSync(filePath, 'utf8');
+export const getFileChecksum = async (filePath: string): Promise<string> => {
+    const content = await readFile(filePath, 'utf8');
     return createHash('md5').update(content).digest('hex');
 };
 
@@ -21,7 +20,7 @@ export const getFileChecksum = (filePath: string): string => {
  * Check if a path exists.
  *
  * @param path Path.
- * @returns True if the path exists, false otherwise.
+ * @returns `true` if the path exists, `false` otherwise.
  */
 export const pathExists = async (path: string): Promise<boolean> => {
     return stat(path)
