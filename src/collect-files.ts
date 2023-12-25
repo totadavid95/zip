@@ -1,33 +1,62 @@
-import { Ignore } from 'ignore';
-import { readdirSync } from 'node:fs';
-import { join } from 'node:path';
+import ignore from 'ignore';
+import normalizePath from 'normalize-path';
+import { readdirSync, existsSync, readFileSync, statSync } from 'node:fs';
+import { join, relative } from 'node:path';
+
+const IGNORE_FILE_NAME = '.zipignore';
 
 /**
- * Collect all files from a directory recursively
+ * Get ignore patterns from the specified directory.
  *
- * @param dir Directory path
- * @param ignores Ignore patterns
- * @returns Collected files
+ * @param dir Directory path.
+ * @returns Ignore patterns.
  */
-export const collectFiles = (dir: string, ignores: Ignore): string[] => {
-    const files: string[] = [];
+const getIgnorePatterns = (dir: string): string[] => {
+    const patterns = [];
+    const ignoreFile = join(dir, IGNORE_FILE_NAME);
 
-    // Read all files from directory
-    const entries = readdirSync(dir, { withFileTypes: true });
-
-    for (const entry of entries) {
-        const path = join(dir, entry.name);
-
-        if (ignores.ignores(path) || entry.isSymbolicLink()) {
-            continue;
-        }
-
-        if (entry.isDirectory()) {
-            files.push(...collectFiles(path, ignores));
-        } else {
-            files.push(path);
-        }
+    if (existsSync(ignoreFile) && statSync(ignoreFile).isFile()) {
+        const content = readFileSync(ignoreFile, 'utf8');
+        const lines = content
+            .split(/\r?\n/)
+            .map((line) => line.trim())
+            .filter((line) => line.length > 0);
+        patterns.push(...lines);
     }
 
-    return files;
+    return patterns;
+};
+
+/**
+ * Collect all files from a directory recursively, excluding specified patterns.
+ *
+ * @param dir Directory path.
+ * @returns Collected files.
+ */
+export const collectFiles = (dir: string): string[] => {
+    const collectFilesInternal = (subDir: string, ignores: string[] = []): string[] => {
+        const files: string[] = [];
+        const entries = readdirSync(subDir, { withFileTypes: true });
+
+        const ignoredPaths: string[] = [...ignores, ...getIgnorePatterns(subDir)];
+        const ignoreInstance = ignore().add(ignoredPaths);
+
+        for (const entry of entries) {
+            const relativePath = relative(dir, join(subDir, entry.name));
+
+            if (ignoreInstance.ignores(entry.name) || ignoreInstance.ignores(relativePath) || entry.isSymbolicLink()) {
+                continue;
+            }
+
+            if (entry.isDirectory()) {
+                files.push(...collectFilesInternal(join(subDir, entry.name), ignoredPaths));
+            } else if (entry.isFile()) {
+                files.push(normalizePath(relativePath));
+            }
+        }
+
+        return files;
+    };
+
+    return collectFilesInternal(dir);
 };
