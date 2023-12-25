@@ -44,7 +44,7 @@ export const getProgramOptions = (): ProgramOptions => {
         .option('--no-verify', 'Ignore verifying files after zipping')
         .parse(process.argv);
 
-    // Output directory always should be ignored, because it is not make sense to zip it.
+    // Output dir is always ignored, as it makes no sense to include it in the zip file.
     const options = program.opts();
     if (options.outdir) {
         options.ignore.push(options.outdir);
